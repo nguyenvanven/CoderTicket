@@ -6,7 +6,13 @@
         <h4 class="card-title"><%= event.name %></h4>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
         </p>
+        <% if not event.published? %>
+        <div>
+          <%= link_to "Publish", publish_event_path(:event_id=>event.id), method:"post", class:"btn btn-primary" %>
+          <%= link_to "Add Ticket Type", ticket_types_new_path(:event_id=>event.id), class:"btn btn-primary" %>
+        </div>
+        <%end%>
       </div>
     </div>
   <% end %>
-</div>  
+</div>

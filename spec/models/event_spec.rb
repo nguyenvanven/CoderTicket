@@ -47,10 +47,16 @@ RSpec.describe Event, type: :model do
 
  describe "Test upcoming events" do
    it "Get event in future only" do
-     @futureEvent = Event.create(extended_html_description:"<h1>description</h1>",name:"Event in future",venue_id: @venue.id, starts_at: DateTime.now + 10.days, category_id: @category.id)
-     @pastEvent = Event.create(extended_html_description:"<h1>description</h1>",name:"Event in the past",venue_id: @venue.id, starts_at: DateTime.now - 1.days, category_id: @category.id)
-     expect(Event.upcoming.any?{|e| e.id == @futureEvent.id }).to be_truthy
-     expect(Event.upcoming.any?{|e| e.id == @pastEvent.id}).to be_falsey
+     @futureEvent = Event.create(extended_html_description:"<h1>description</h1>",name:"Event in future",venue_id: @venue.id, starts_at: DateTime.now + 10.days, category_id: @category.id, publish_at:DateTime.now)
+     @pastEvent = Event.create(extended_html_description:"<h1>description</h1>",name:"Event in the past",venue_id: @venue.id, starts_at: DateTime.now - 1.days, category_id: @category.id, publish_at:DateTime.now)
+     expect(Event.upcoming(nil)).to eq [@futureEvent]
+     expect(Event.upcoming(nil).any?{|e| e.id == @pastEvent.id}).to be_falsey
+   end
+   it "get event in future with param" do
+     @future_event1 = Event.create(extended_html_description:"<h1>description</h1>",name:"Event 1",venue_id: @venue.id, starts_at: DateTime.now + 10.days, category_id: @category.id, publish_at:DateTime.now)
+     @future_event2 = Event.create(extended_html_description:"<h1>description</h1>",name:"Event 2",venue_id: @venue.id, starts_at: DateTime.now + 1.days, category_id: @category.id,publish_at:DateTime.now)
+     expect(Event .upcoming("Event 1")).to eq [@future_event1]
+     expect(Event.upcoming("Event 2")).to eq [@future_event2]
    end
  end
 end

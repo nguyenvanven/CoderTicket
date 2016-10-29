@@ -16,6 +16,9 @@
       </li>
       <% if current_user.present? %>
       <li class="nav-item">
+        <%= link_to "Unpublised Events", unpublished_events_path, class:"nav-link" %>
+      </li>
+      <li class="nav-item">
         <%= link_to current_user.full_name, class:"nav-link" %>
       </li>
       <li class="nav-item">

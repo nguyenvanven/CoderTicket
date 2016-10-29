@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+  resources :venues
+
   resources :users
   root 'events#index'
   get 'upcoming' =>'events#index'
-
+  post 'publish_event' => 'events#publish'
+  get 'unpublished_events' => 'events#unpublished_events'
+  get 'ticket_types/new'
+  post 'ticket_types' => 'ticket_types#create'
   resources :events do
     resources :tickets
   end

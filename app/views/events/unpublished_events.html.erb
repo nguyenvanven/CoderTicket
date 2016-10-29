@@ -6,10 +6,6 @@
     </form>
   </div>
 </div>
-<div class="row">
-  <%= link_to "New Event", new_event_path, class:"btn btn-primary xs-float-right"%>
-  <%= link_to "New Venue", new_venue_path, class:"btn btn-primary xs-float-right"%>
-</div>
 <div class="container-fluid events-list">
     <% @events.in_groups_of(3) do |g| %>
       <div class="row">

@@ -1,0 +1,35 @@
+<div class="container">
+<%= simple_form_for(@venue) do |f| %>
+	<% unless @venue.errors.empty? %>
+		<div class="alert alert-danger" >
+		Please correct following errors:
+		<% @venue.errors.full_messages.each do |message| %>
+			<li><%= message %> </li>
+		<% end %>
+		</div>
+	<% end %>
+
+	<div class="form-horizontal">
+
+		<div class="form-group row">
+			<label class="control-label col-sm-2">Name:</label>
+			<%= f.text_field :name, class:"col-sm-4", placeholder: "Enter Venue name..."%>
+		</div>
+		<div class="form-group row">
+			<label class="control-label col-sm-2">Full Address:</label>
+			<%= f.text_area :full_address, class:"col-sm-4", :rows=>5, placeholder: "Enter full address of venue..." %>
+		</div>
+    <div class="form-group row">
+      <label class="control-label col-sm-2">Region:</label>
+      <div class="col-sm-4">
+        <%= f.select :region_id, options_from_collection_for_select(@regions,"id","name"), :class => "chzn-select" %>
+      </div>
+    </div>
+		<div class="form-group row">
+      <div class="col-sm-2">
+      </div>
+      <%= f.submit "Create", class:'btn btn-primary' %>
+    </div>
+	</div>
+	<%end%>
+</div>
