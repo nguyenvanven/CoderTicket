@@ -21,9 +21,9 @@ dalat = Venue.create({
 })
 
 e = Event.create({
-  name: 'Việt Nam Thử Thách Chiến Thắng', 
+  name: 'Việt Nam Thử Thách Chiến Thắng',
   starts_at: DateTime.parse('Fri, 11 Mar 2016 7:00 AM+0700'),
-  ends_at: DateTime.parse('Sun, 13 Mar 2016 3:00 PM+0700'),
+  ends_at: DateTime.parse('Sun, 13 Dec 2016 3:00 PM+0700'),
   venue: dalat,
   category: Category.find_by(name: 'Everything Else'),
   hero_image_url: 'https://az810747.vo.msecnd.net/eventcover/2015/10/25/C6A1A5.jpg?w=1040&maxheight=400&mode=crop&anchor=topcenter',
@@ -49,11 +49,11 @@ dan_venue = Venue.create({
 })
 
 e = Event.create({
-  name: 'Cảm ơn Đời - Live Concert Đan Trường', 
+  name: 'Cảm ơn Đời - Live Concert Đan Trường',
   venue: dan_venue,
   category: Category.find_by(name: 'Entertainment'),
-  starts_at: DateTime.parse('Sat, 16 Jan 2016, 8:00 PM+0700'),
-  ends_at: DateTime.parse('Sat, 16 Jan 2016, 10:30 PM+0700'),  
+  starts_at: DateTime.parse('Sat, 16 Nov 2016, 8:00 PM+0700'),
+  ends_at: DateTime.parse('Sat, 16 Jan 2016, 10:30 PM+0700'),
   hero_image_url: 'https://az810747.vo.msecnd.net/eventcover/2015/12/11/C68636.jpg?w=1040&maxheight=400&mode=crop&anchor=topcenter',
   extended_html_description: <<-DESC
   <p style="text-align:justify"> </p>
@@ -109,7 +109,7 @@ e = Event.create({
   <p style="text-align:justify"> </p>
 
                           </div>
-                          
+
                           <!--/agenda-->
                       </div>
                   </div>
@@ -154,7 +154,7 @@ e = Event.create({
   <span style="background-color:rgb(255, 255, 255); color:rgb(20, 24, 35); font-family:helvetica,arial,sans-serif; font-size:14px">Ngo&agrave;i ra c&ograve;n nhiều Voucher tặng bạn v&ocirc; c&ugrave;ng hấp dẫn :D</span></p>
 
                         </div>
-                        
+
   DESC
-})  
+})
 e.ticket_types << TicketType.create(name: 'General', price: 99000, max_quantity: 1000)
