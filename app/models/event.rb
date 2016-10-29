@@ -22,8 +22,8 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def self.unpublished_events(user_id)
-    where("(publish_at is null) and (created_by = ?)", user_id)
+  def self.my_events(user_id)
+    where("created_by = ?", user_id)
   end
 
   def self.publish(id)
@@ -32,5 +32,9 @@ class Event < ActiveRecord::Base
 
   def published?
     return publish_at.present?
+  end
+
+  def has_enough_ticket_types?
+    return ticket_types.count >= 1
   end
 end

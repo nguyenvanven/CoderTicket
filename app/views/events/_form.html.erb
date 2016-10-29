@@ -41,7 +41,11 @@
     <div class="form-group row">
       <div class="col-sm-2">
       </div>
+			<% if @event.id.present? %>
+			<%= f.submit "Save", class:'btn btn-primary' %>
+			<% else %>
       <%= f.submit "Create", class:'btn btn-primary' %>
+			<%end %>
     </div>
   </div>
 

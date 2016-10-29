@@ -8,7 +8,9 @@
         </p>
         <% if not event.published? %>
         <div>
-          <%= link_to "Publish", publish_event_path(:event_id=>event.id), method:"post", class:"btn btn-primary" %>
+          <% if event.has_enough_ticket_types? %>
+            <%= link_to "Publish", publish_event_path(:event_id=>event.id), method:"post", class:"btn btn-primary" %>
+          <% end %>
           <%= link_to "Add Ticket Type", ticket_types_new_path(:event_id=>event.id), class:"btn btn-primary" %>
         </div>
         <%end%>

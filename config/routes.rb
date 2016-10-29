@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root 'events#index'
   get 'upcoming' =>'events#index'
   post 'publish_event' => 'events#publish'
-  get 'unpublished_events' => 'events#unpublished_events'
+  get 'my_events' => 'events#mine'
   get 'ticket_types/new'
   post 'ticket_types' => 'ticket_types#create'
   resources :events do

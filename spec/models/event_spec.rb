@@ -59,4 +59,18 @@ RSpec.describe Event, type: :model do
      expect(Event.upcoming("Event 2")).to eq [@future_event2]
    end
  end
+
+ describe "Validate ticket types" do
+   it "false if there is no ticket type" do
+     @event = Event.create(extended_html_description:"<h1>description</h1>",name:"Event in future",venue_id: @venue.id, starts_at: DateTime.now + 10.days, category_id: @category.id, publish_at:DateTime.now)
+     expect(@event.has_enough_ticket_types?).to be_falsey
+   end
+
+   it "true if there is at least one ticket type" do
+     @event = Event.create(extended_html_description:"<h1>description</h1>",name:"Event in future",venue_id: @venue.id, starts_at: DateTime.now + 10.days, category_id: @category.id, publish_at:DateTime.now)
+     TicketType.create(name: "Test type", event_id:@event.id, price:1000, max_quantity:100000)
+     @event.reload
+     expect(@event.has_enough_ticket_types?).to be_truthy
+   end
+ end
 end

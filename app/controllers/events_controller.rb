@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :check_edit_right, only: [:edit, :update]
   def index
     if params[:upcoming]
       @events = Event.upcoming(params[:search])
@@ -7,8 +9,8 @@ class EventsController < ApplicationController
     end
   end
 
-  def unpublished_events
-    @events = Event.unpublished_events(current_user.id)
+  def mine
+    @events = Event.my_events(current_user.id)
   end
 
   def show
@@ -43,7 +45,34 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = Event.new
+    @venues = Venue.all
+    @event = Event.find(params[:event_id])
+    @categories = Category.all
+  end
+
+  def update
+    if @event.update(event_params)
+      flash[:success]="Event has been updated successfully"
+      render 'show', {:event_id=>@event.id}
+    else
+      flash[:error] = "Cannot update the event"
+      render 'edit'
+    end
+  end
+
   private
+  def set_event
+      @event = Event.find(params[:id])
+  end
+  def check_edit_right
+    @event = Event.find(params[:id])
+    if @event.created_by != current_user.id
+      flash[:error] = "You don't have permission to edit this event"
+      redirect_to :back
+    end
+  end
   def event_params
     params[:event].permit(:starts_at,:ends_at,:venue_id,:hero_image_url,:extended_html_description,:category_id,:name)
   end
