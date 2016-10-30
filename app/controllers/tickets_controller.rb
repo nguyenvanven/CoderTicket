@@ -5,6 +5,11 @@ class TicketsController < ApplicationController
   end
 
   def create
+    if @event.past_event?
+      flash[:error] = "Cannot buy ticket for past event"
+      render "new"
+      return
+    end
     @ticket = Ticket.new(event_id:@event.id)
     @ticket.user_id = session[:user_id]
     @event.ticket_types.each do |ticket_type|

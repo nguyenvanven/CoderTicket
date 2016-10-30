@@ -10,7 +10,8 @@ class VenuesController < ApplicationController
       flash[:success] = "You've created venue successfully"
       redirect_to root_path
     else
-      render 'new', :notice => "Cannot create new venue"
+      flash[:error] = "Cannot create new venue"
+      render 'new'
     end
   end
 

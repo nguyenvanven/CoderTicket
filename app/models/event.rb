@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
     if search
       where("(name like ?) and (publish_at is not null)","%#{search}%")
     else
-      all
+      where ("publish_at is not null")
     end
   end
 
@@ -36,5 +36,9 @@ class Event < ActiveRecord::Base
 
   def has_enough_ticket_types?
     return ticket_types.count >= 1
+  end
+
+  def past_event?
+    return starts_at < DateTime.now
   end
 end
