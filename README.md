@@ -6,7 +6,7 @@ Submitted by: **Nguyen Van Ven**
 
 Time spent: **25** hours
 
-URL: **Insert your Heroku URL here**
+URL: **https://cryptic-plains-25142.herokuapp.com**
 
 SimpleCov Test Coverage: **Insert percentage or link to report here**
 

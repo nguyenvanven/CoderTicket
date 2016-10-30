@@ -6,10 +6,12 @@
     </form>
   </div>
 </div>
+<% if current_user.present? %>
 <div class="row">
   <%= link_to "New Event", new_event_path, class:"btn btn-primary xs-float-right"%>
   <%= link_to "New Venue", new_venue_path, class:"btn btn-primary xs-float-right"%>
 </div>
+<% end %>
 <div class="container-fluid events-list">
     <% @events.in_groups_of(3) do |g| %>
       <div class="row">
